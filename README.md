@@ -42,6 +42,7 @@ $Shortcut = $WScriptShell.CreateShortcut($desktopShortcut)
 $Shortcut.TargetPath = $batchFile
 $Shortcut.Save()
 
-Write-Host "Installation terminée. Vous pouvez lancer le script avec le raccourci sur le bureau."```
+Write-Host "Installation terminée. Vous pouvez lancer le script avec le raccourci sur le bureau."
+```
 
 Maintenant, vous pouvez faire de belle invitation sur ce beau serveur français.
