@@ -1,5 +1,5 @@
 # RPC-Zamours
-Prérequis, (node-version-20)[https://nodejs.org/en/download/prebuilt-installer], utilisé windows comme os
+Prérequis, [node version 20](https://nodejs.org/en/download/prebuilt-installer), utilisé windows comme os
 
 ensuite, executé powershell en mode admin et executé ce script d'installation :
 ```ps1
