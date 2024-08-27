@@ -5,7 +5,7 @@ const fs = require('fs');
 const readline = require('readline');
 
 // updater
-const url = 'https://raw.githubusercontent.com/axiomxdev/RPC-Zamours/main/package.json';
+const url = 'https://raw.githubusercontent.com/axiomxdev/RPC-Zamours/main/src/package.json';
 const currentVersion = require(path + '\\package.json').version
 
 fetch(url)
