@@ -1,6 +1,6 @@
 {
   "name": "rpc-zamours",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "scripts": {
     "build": "pkg setup.js --target node18-win-x64 --output RPC-ZAMOURS.exe",
