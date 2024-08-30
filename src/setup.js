@@ -1,31 +1,27 @@
-const path = __dirname;
-
+const path = require('path');
 const fetch = require('node-fetch');
 const fs = require('fs');
 const readline = require('readline');
 
+const configPath = process.pkg ? path.join(path.dirname(process.execPath), 'config.json') : path.join(__dirname, 'config.json');
+const packagePath = process.pkg ? path.join(path.dirname(process.execPath), 'package.json') : path.join(__dirname, 'package.json');
+
 // updater
 const url = 'https://raw.githubusercontent.com/axiomxdev/RPC-Zamours/main/src/package.json';
-const currentVersion = require(path + '\\package.json').version
+const currentVersion = require(packagePath).version;
 
 fetch(url)
     .then(response => response.json())
     .then(data => {
-
-        const latestVersion = data.version
-
-        if (latestVersion !== currentVersion){
-            console.log(`Nouvelle version disponible : ${latestVersion}. Vous avez actuellement : ${currentVersion}.\nUpdate de l'application en cours . . .\n`);
+        const latestVersion = data.version;
+        if (latestVersion !== currentVersion) {
+            console.log(`Nouvelle version disponible : ${latestVersion}. Vous avez actuellement : ${currentVersion}.\n`);
             // updater script
         }
-
-}).catch(error => 
-    console.error('Erreur lors de la vérification de la version :', error
-));
+    }).catch(error => console.error('Erreur lors de la vérification de la version :', error));
 
 // setup
-
-const config = require(path + '\\config');
+const config = require(configPath);
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -45,7 +41,7 @@ async function validateAppID(appID) {
         const response = await fetch(`https://discord.com/api/v9/applications/${appID}/rpc`);
         if (response.ok) {
             console.log('L\'ID de l\'application est valide.');
-            return true
+            return true;
         } else {
             console.log('L\'ID de l\'application n\'est pas valide.');
         }
@@ -66,7 +62,7 @@ async function validateAppID(appID) {
         if (await validateAppID(appID)) {
             config.appID = appID;
 
-            fs.writeFile(path + '\\config.json', JSON.stringify(config, null, 2), (err) => {
+            fs.writeFile(configPath, JSON.stringify(config, null, 2), (err) => {
                 if (err) {
                     console.error('Erreur lors de la mise à jour du fichier de configuration:', err);
                 } else {
@@ -75,6 +71,6 @@ async function validateAppID(appID) {
                 rl.close();
             });
             require('./index.js');
-        };
-    };
+        }
+    }
 })();
