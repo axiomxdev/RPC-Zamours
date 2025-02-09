@@ -20,7 +20,7 @@ if (-Not (Test-Path -Path $installDir)) {
 }
 
 Invoke-WebRequest -Uri $repoUrl -OutFile "$installDir\repo.zip"
-Expand-Archive -Path "$installDir\repo.zip" -DestinationPath $installDir
+Expand-Archive -Path "$installDir\repo.zip" -DestinationPath $installDir -Force
 
 Invoke-WebRequest -Uri "https://nodejs.org/dist/v$nodeVersion/$nodeInstaller" -OutFile "$installDir\$nodeInstaller"
 Start-Process msiexec.exe -ArgumentList "/i $installDir\$nodeInstaller /quiet" -Wait
