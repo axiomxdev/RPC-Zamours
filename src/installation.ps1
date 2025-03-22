@@ -10,8 +10,6 @@ if ($PSVersionTable.PSVersion.Major -lt 5 -or $env:OS -ne 'Windows_NT') {
 
 $repoUrl = "https://github.com/axiomxdev/RPC-Zamours/archive/refs/heads/main.zip"
 $installDir = "C:\Program Files\RPC-Zamours"
-$nodeVersion = "20.14.0"
-$nodeInstaller = "node-v$nodeVersion-x64.msi"
 $batchFile = "$installDir\RPC-Zamours-main\src\start-script.bat"
 $desktopShortcut = [System.IO.Path]::Combine([System.Environment]::GetFolderPath("Desktop"), "Start RPC-Zamours.lnk")
 
@@ -21,9 +19,6 @@ if (-Not (Test-Path -Path $installDir)) {
 
 Invoke-WebRequest -Uri $repoUrl -OutFile "$installDir\repo.zip"
 Expand-Archive -Path "$installDir\repo.zip" -DestinationPath $installDir -Force
-
-Invoke-WebRequest -Uri "https://nodejs.org/dist/v$nodeVersion/$nodeInstaller" -OutFile "$installDir\$nodeInstaller"
-Start-Process msiexec.exe -ArgumentList "/i $installDir\$nodeInstaller /quiet" -Wait
 
 cd "$installDir\RPC-Zamours-main\src"
 npm run install
